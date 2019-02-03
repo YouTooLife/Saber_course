@@ -9,43 +9,10 @@
 #include <iostream>
 #include "RTTI/rtti.h"
 
-class Object
-{
-public:
-    DEFINE_RTTI_ROOT(Object)
-};
-
-class ChildObject : public Object
-{
-public:
-    DEFINE_RTTI_OBJECT(ChildObject, Object)
-};
-
-class ChildObject2 : public Object
-{
-public:
-    DEFINE_RTTI_OBJECT(ChildObject2, Object)
-    
-};
-
-class SecondChildObject : public ChildObject
-{
-public:
-    DEFINE_RTTI_OBJECT(SecondChildObject, ChildObject)
-};
-
-
-class SecondChildObject2 : public ChildObject, public ChildObject2
-{
-public:
-    DEFINE_RTTI_OBJECT3(SecondChildObject2, ChildObject, ChildObject2)
-    
-};
 
 
 class Base
 {
-    
     virtual void print() = 0;
 public:
     DEFINE_RTTI_ROOT(Base)
@@ -100,7 +67,7 @@ public:
 template <class T, class C>
 void printIsCanCast(C* obj)
 {
-    T* t = Object::DynamicCast<T>(obj);
+    T* t = Base::DynamicCast<T>(obj);
     std::cout << GET_OBJECT_TYPE_NAME(obj) << " is " << (t?"": "not ") << GET_CLASS_TYPE_NAME(T) << "\n";
 }
 
