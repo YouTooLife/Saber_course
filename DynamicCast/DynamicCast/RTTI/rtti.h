@@ -102,30 +102,30 @@ RTTI_GET_TYPE(cls)
 
 
 #define GET_BASE_TYPE(VAL, BASE0, SUPER, cls) \
-BaseType VAL(BASE0.getSuperPtr(), &cls::SUPER::Type(), #cls);
+static BaseType VAL(BASE0.getSuperPtr(), &cls::SUPER::Type(), #cls);
 
 
 #define DEFINE_RTTI_OBJECT3(cls, super, super1)    \
 static inline  BaseType&  Type() { \
-BaseType _base0(&cls::super::Type(), #cls); \
-static GET_BASE_TYPE(_base1, _base0, super1, cls) \
+static BaseType _base0(&cls::super::Type(), #cls); \
+GET_BASE_TYPE(_base1, _base0, super1, cls) \
 return _base1; }  \
 RTTI_GET_TYPE(cls)
 
 #define DEFINE_RTTI_OBJECT4(cls, super, super1, super2)    \
 static inline  BaseType&  Type() { \
-BaseType _base0(&cls::super::Type(), #cls); \
+static BaseType _base0(&cls::super::Type(), #cls); \
 GET_BASE_TYPE(_base1, _base0, super1, cls) \
-static GET_BASE_TYPE(_base2, _base1, super2, cls) \
+GET_BASE_TYPE(_base2, _base1, super2, cls) \
 return _base2; }  \
 RTTI_GET_TYPE(cls)
 
 #define DEFINE_RTTI_OBJECT5(cls, super, super1, super2, super3)    \
 static inline  BaseType&  Type() { \
-BaseType _base0(&cls::super::Type(), #cls); \
+staticBaseType _base0(&cls::super::Type(), #cls); \
 GET_BASE_TYPE(_base1, _base0, super1, cls) \
 GET_BASE_TYPE(_base2, _base1, super2, cls) \
-static GET_BASE_TYPE(_base3, _base2, super3, cls) \
+GET_BASE_TYPE(_base3, _base2, super3, cls) \
 return _base3; }  \
 RTTI_GET_TYPE(cls)
 
